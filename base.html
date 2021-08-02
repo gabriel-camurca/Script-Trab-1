@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function clk(){
+        var xhttp = new XMLHttpRequest();
+
+        var num = document.getElementById("numero").value;
+
+        var output = document.getElementById("resultado").innerHTML;
+
+        var dado = {numero: num, texto: output}
+
+        var jsonText = JSON.stringify(dado);
+
+        // console.log(jsonText);
+
+        xhttp.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("resultado").innerHTML = this.responseText;
+            }
+        };
+
+        xhttp.open("GET", "$" + jsonText, true);
+        xhttp.send();
+    }
+</script>
+<body>
+    <p id="txt">Digite um número:</p>
+    <input id="numero">
+    <button id="btn" onclick="clk()">Entrar</button>
+    <p>Resultado</p>
+    <p id="resultado"></p>
+</body>
+</html>
